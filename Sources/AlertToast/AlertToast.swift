@@ -10,6 +10,7 @@
 
 import SwiftUI
 import Combine
+import ActivityIndicatorView
 
 @available(iOS 13, macOS 11, *)
 fileprivate struct AnimatedCheckmark: View {
@@ -245,7 +246,10 @@ public struct AlertToast: View{
                         Image(name)
                             .foregroundColor(color)
                     case .loading:
-                        ActivityIndicator()
+//                        ActivityIndicator()
+                        ActivityIndicatorView(isVisible: $isVisible, type: .arcs(count: 3, lineWidth: 2))
+                            .frame(width: 25.0, height: 25.0)
+                            .foregroundColor(.white)
                     case .regular:
                         EmptyView()
                     }
@@ -270,6 +274,8 @@ public struct AlertToast: View{
         }
     }
     
+    @State var isVisible: Bool = true
+    
     ///HUD View
     public var hud: some View{
         Group{
@@ -292,7 +298,11 @@ public struct AlertToast: View{
                         .hudModifier()
                         .foregroundColor(color)
                 case .loading:
-                    ActivityIndicator()
+//                    ActivityIndicator()
+                    ActivityIndicatorView(isVisible: $isVisible, type: .default())
+                        .frame(width: 25.0, height: 25.0)
+                        .foregroundColor(.white)
+
                 case .regular:
                     EmptyView()
                 }
@@ -360,7 +370,10 @@ public struct AlertToast: View{
                     .padding(.bottom)
                 Spacer()
             case .loading:
-                ActivityIndicator()
+//                ActivityIndicator()
+                ActivityIndicatorView(isVisible: $isVisible, type: .default())
+                    .frame(width: 25.0, height: 25.0)
+                    .foregroundColor(.white)
             case .regular:
                 EmptyView()
             }
